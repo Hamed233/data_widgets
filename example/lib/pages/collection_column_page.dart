@@ -34,10 +34,11 @@ class _CollectionColumnPageState extends State<CollectionColumnPage> {
         onChange: (update) {
           setState(() => data = update);
         },
-        builder: (_, g) {
+        builder: (_, g, {bool dragging = false}) {
           return Container(
             constraints: BoxConstraints(minHeight: 80),
             child: Card(
+              elevation: dragging ? 4.0 : 1.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -52,8 +53,11 @@ class _CollectionColumnPageState extends State<CollectionColumnPage> {
                         );
                       });
                     },
-                    builder: (_, y) {
-                      return ListTile(title: Text(y.title));
+                    builder: (_, y, {bool dragging = false}) {
+                      return ListTile(
+                        title: Text(y.title),
+                        tileColor: dragging ? Colors.grey.withOpacity(0.1) : null,
+                      );
                     },
                   ),
                 ],
